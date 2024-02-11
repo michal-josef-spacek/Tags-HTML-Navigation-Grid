@@ -89,12 +89,12 @@ sub _process {
 				['e', 'img'],
 			) : (),
 			['b', 'h3'],
-			defined $item->url ? (
+			defined $item->location ? (
 				['b', 'a'],
-				['a', 'href', $item->url],
+				['a', 'href', $item->location],
 			) : (),
 			['d', $item->title],
-			defined $item->url ? (
+			defined $item->location ? (
 				['e', 'a'],
 			) : (),
 			['e', 'h3'],
