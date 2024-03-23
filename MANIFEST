@@ -18,5 +18,11 @@ META.yml
 README
 t/Tags-HTML-Navigation-Grid/01-use.t
 t/Tags-HTML-Navigation-Grid/02-version.t
+t/Tags-HTML-Navigation-Grid/03-new.t
+t/Tags-HTML-Navigation-Grid/04-cleanup.t
+t/Tags-HTML-Navigation-Grid/05-init.t
+t/Tags-HTML-Navigation-Grid/06-prepare.t
+t/Tags-HTML-Navigation-Grid/07-process.t
+t/Tags-HTML-Navigation-Grid/08-process_css.t
 xt/Tags-HTML-Navigation-Grid/01-pod_coverage.t
 xt/Tags-HTML-Navigation-Grid/02-pod.t
