@@ -48,9 +48,10 @@ is_deeply(
 		['d', 'height', '100px'],
 		['e'],
 
-		['s', '.nav-item h3'],
+		['s', '.nav-item div.title'],
 		['d', 'margin', '10px 0'],
 		['d', 'font-family', 'sans-serif'],
+		['d', 'font-weight', 'bold'],
 		['e'],
 
 		['s', '.nav-item '],
@@ -101,9 +102,10 @@ is_deeply(
 		['d', 'height', '100px'],
 		['e'],
 
-		['s', '.nav-item h3'],
+		['s', '.nav-item div.title'],
 		['d', 'margin', '10px 0'],
 		['d', 'font-family', 'sans-serif'],
+		['d', 'font-weight', 'bold'],
 		['e'],
 
 		['s', '.nav-item '],

@@ -82,22 +82,23 @@ sub _process {
 			) : (
 				['a', 'class', 'nav-item'],
 			),
+			defined $item->location ? (
+				['b', 'a'],
+				['a', 'href', $item->location],
+			) : (),
 			defined $item->image ? (
 				['b', 'img'],
 				['a', 'src', $item->image],
 				['a', 'alt', $item->title],
 				['e', 'img'],
 			) : (),
-			['b', 'h3'],
-			defined $item->location ? (
-				['b', 'a'],
-				['a', 'href', $item->location],
-			) : (),
+			['b', 'div'],
+			['a', 'class', 'title'],
 			['d', $item->title],
+			['e', 'div'],
 			defined $item->location ? (
 				['e', 'a'],
 			) : (),
-			['e', 'h3'],
 			defined $item->desc ? (
 				['b', 'p'],
 				['d', $item->desc],
@@ -144,9 +145,10 @@ sub _process_css {
 		['d', 'height', '100px'],
 		['e'],
 
-		['s', '.nav-item h3'],
+		['s', '.nav-item div.title'],
 		['d', 'margin', '10px 0'],
 		['d', 'font-family', 'sans-serif'],
+		['d', 'font-weight', 'bold'],
 		['e'],
 
 		['s', '.nav-item '],
@@ -349,9 +351,10 @@ Returns undef.
  #         width: 100px;
  #         height: 100px;
  # }
- # .nav-item h3 {
+ # .nav-item div.title {
  #         margin: 10px 0;
  #         font-family: sans-serif;
+ #         font-weight: bold;
  # }
  # .nav-item  {
  #         text-align: center;
@@ -361,25 +364,25 @@ Returns undef.
  # HTML
  # <nav class="navigation">
  #   <div class="nav-item1">
- #     <img src="/img/foo.png" alt="First">
- #     </img>
- #     <h3>
- #       <a href="/first">
+ #     <a href="/first">
+ #       <img src="/img/foo.png" alt="First">
+ #       </img>
+ #       <div class="title">
  #         First
- #       </a>
- #     </h3>
+ #       </div>
+ #     </a>
  #     <p>
  #       This is description #1
  #     </p>
  #   </div>
  #   <div class="nav-item2">
- #     <img src="/img/bar.png" alt="Second">
- #     </img>
- #     <h3>
- #       <a href="/second">
+ #     <a href="/second">
+ #       <img src="/img/bar.png" alt="Second">
+ #       </img>
+ #       <div class="title">
  #         Second
- #       </a>
- #     </h3>
+ #       </div>
+ #     </a>
  #     <p>
  #       This is description #2
  #     </p>

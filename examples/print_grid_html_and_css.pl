@@ -68,9 +68,10 @@ print $tags->flush."\n";
 #         width: 100px;
 #         height: 100px;
 # }
-# .nav-item h3 {
+# .nav-item div.title {
 #         margin: 10px 0;
 #         font-family: sans-serif;
+#         font-weight: bold;
 # }
 # .nav-item  {
 #         text-align: center;
@@ -80,25 +81,25 @@ print $tags->flush."\n";
 # HTML
 # <nav class="navigation">
 #   <div class="nav-item1">
-#     <img src="/img/foo.png" alt="First">
-#     </img>
-#     <h3>
-#       <a href="/first">
+#     <a href="/first">
+#       <img src="/img/foo.png" alt="First">
+#       </img>
+#       <div class="title">
 #         First
-#       </a>
-#     </h3>
+#       </div>
+#     </a>
 #     <p>
 #       This is description #1
 #     </p>
 #   </div>
 #   <div class="nav-item2">
-#     <img src="/img/bar.png" alt="Second">
-#     </img>
-#     <h3>
-#       <a href="/second">
+#     <a href="/second">
+#       <img src="/img/bar.png" alt="Second">
+#       </img>
+#       <div class="title">
 #         Second
-#       </a>
-#     </h3>
+#       </div>
+#     </a>
 #     <p>
 #       This is description #2
 #     </p>
