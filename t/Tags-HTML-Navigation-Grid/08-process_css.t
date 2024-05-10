@@ -50,10 +50,12 @@ is_deeply(
 
 		['s', '.nav-item h3'],
 		['d', 'margin', '10px 0'],
+		['d', 'font-family', 'sans-serif'],
 		['e'],
 
 		['s', '.nav-item '],
 		['d', 'text-align', 'center'],
+		['d', 'font-family', 'sans-serif'],
 		['e'],
 	],
 	'Navigation CSS code (default).',
@@ -101,10 +103,12 @@ is_deeply(
 
 		['s', '.nav-item h3'],
 		['d', 'margin', '10px 0'],
+		['d', 'font-family', 'sans-serif'],
 		['e'],
 
 		['s', '.nav-item '],
 		['d', 'text-align', 'center'],
+		['d', 'font-family', 'sans-serif'],
 		['e'],
 	],
 	'Navigation CSS code (explicit CSS class).',
