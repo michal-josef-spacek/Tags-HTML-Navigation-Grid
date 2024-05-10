@@ -27,7 +27,7 @@ METHODS
 
     *       "css"
 
-            'CSS::Struct::Output' object for process_css processing.
+            CSS::Struct::Output object for process_css processing.
 
             Default value is undef.
 
@@ -39,7 +39,7 @@ METHODS
 
     *       "tags"
 
-            'Tags::Output' object.
+            Tags::Output object.
 
             Default value is undef.
 

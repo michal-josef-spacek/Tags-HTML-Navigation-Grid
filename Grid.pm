@@ -204,7 +204,7 @@ Constructor.
 
 =item * C<css>
 
-'CSS::Struct::Output' object for L<process_css> processing.
+L<CSS::Struct::Output> object for L<process_css> processing.
 
 Default value is undef.
 
@@ -216,7 +216,7 @@ Default value is 'navigation'.
 
 =item * C<tags>
 
-'Tags::Output' object.
+L<Tags::Output> object.
 
 Default value is undef.
 
@@ -255,7 +255,7 @@ Returns undef.
 
  $obj->process;
 
-Process Tags structure for navigation grid.
+Process L<Tags> structure for navigation grid.
 
 Returns undef.
 
@@ -263,7 +263,7 @@ Returns undef.
 
  $obj->process_css;
 
-Process CSS::Struct structure for navigation grid.
+Process L<CSS::Struct> structure for navigation grid.
 
 Returns undef.
 
