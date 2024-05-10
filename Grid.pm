@@ -161,3 +161,377 @@ sub _process_css {
 1;
 
 __END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+Tags::HTML::Navigation::Grid - Tags helper for navigation grid.
+
+=head1 SYNOPSIS
+
+ use Tags::HTML::Navigation::Grid;
+
+ my $obj = Tags::HTML::Navigation::Grid->new(%params);
+ $obj->cleanup;
+ $obj->init($items_ar);
+ $obj->prepare;
+ $obj->process;
+ $obj->process_css;
+
+=head1 METHODS
+
+=head2 C<new>
+
+ my $obj = Tags::HTML::Navigation::Grid->new(%params);
+
+Constructor.
+
+=over 8
+
+=item * C<css>
+
+'CSS::Struct::Output' object for L<process_css> processing.
+
+Default value is undef.
+
+=item * C<css_class>
+
+CSS class for navigation grid.
+
+Default value is 'navigation'.
+
+=item * C<tags>
+
+'Tags::Output' object.
+
+Default value is undef.
+
+=back
+
+Returns instance of object.
+
+=head2 C<cleanup>
+
+ $obj->cleanup;
+
+Process cleanup after page run.
+
+Returns undef.
+
+=head2 C<init>
+
+ $obj->init($items_ar);
+
+Initialize object.
+Variable C<$items_ar> is reference to array with L<Data::Navigation::Item>
+instances.
+
+Returns undef.
+
+=head2 C<prepare>
+
+ $obj->prepare;
+
+Prepare object.
+Do nothing in this object.
+
+Returns undef.
+
+=head2 C<process>
+
+ $obj->process;
+
+Process Tags structure for navigation grid.
+
+Returns undef.
+
+=head2 C<process_css>
+
+ $obj->process_css;
+
+Process CSS::Struct structure for navigation grid.
+
+Returns undef.
+
+=head1 ERRORS
+
+ new():
+         From Class::Utils::set_params():
+                 Unknown parameter '%s'.
+         From Tags::HTML::new():
+                 Parameter 'css' must be a 'CSS::Struct::Output::*' class.
+                 Parameter 'tags' must be a 'Tags::Output::*' class.
+
+ init():
+         Bad reference to array with items.
+         Item object must be a 'Data::Navigation::Item' instance.
+
+ process():
+         From Tags::HTML::process():
+                 Parameter 'tags' isn't defined.
+
+ process_css():
+         From Tags::HTML::process_css():
+                 Parameter 'css' isn't defined.
+
+=head1 EXAMPLE1
+
+=for comment filename=print_grid_html_and_css.pl
+
+ use strict;
+ use warnings;
+
+ use CSS::Struct::Output::Indent;
+ use Data::Navigation::Item;
+ use Tags::HTML::Navigation::Grid;
+ use Tags::Output::Indent;
+
+ # Object.
+ my $css = CSS::Struct::Output::Indent->new;
+ my $tags = Tags::Output::Indent->new;
+ my $obj = Tags::HTML::Navigation::Grid->new(
+         'css' => $css,
+         'tags' => $tags,
+ );
+
+ my @items = (
+         Data::Navigation::Item->new(
+                 'class' => 'nav-item1',
+                 'desc' => 'This is description #1',
+                 'id' => 1,
+                 'image' => '/img/foo.png',
+                 'location' => '/first',
+                 'title' => 'First',
+         ),
+         Data::Navigation::Item->new(
+                 'class' => 'nav-item2',
+                 'desc' => 'This is description #2',
+                 'id' => 2,
+                 'image' => '/img/bar.png',
+                 'location' => '/second',
+                 'title' => 'Second',
+         ),
+ );
+ $obj->init(\@items);
+
+ # Process login b.
+ $obj->process_css;
+ $obj->process;
+
+ # Print out.
+ print "CSS\n";
+ print $css->flush."\n\n";
+ print "HTML\n";
+ print $tags->flush."\n";
+
+ # Output:
+ # CSS
+ # .navigation {
+ #         display: flex;
+ #         flex-wrap: wrap;
+ #         gap: 20px;
+ #         padding: 20px;
+ #         justify-content: center;
+ # }
+ # .nav-item {
+ #         display: flex;
+ #         flex-direction: column;
+ #         align-items: center;
+ #         border: 2px solid #007BFF;
+ #         border-radius: 15px;
+ #         padding: 15px;
+ #         width: 200px;
+ # }
+ # .nav-item img {
+ #         width: 100px;
+ #         height: 100px;
+ # }
+ # .nav-item h3 {
+ #         margin: 10px 0;
+ #         font-family: sans-serif;
+ # }
+ # .nav-item  {
+ #         text-align: center;
+ #         font-family: sans-serif;
+ # }
+ # 
+ # HTML
+ # <nav class="navigation">
+ #   <div class="nav-item1">
+ #     <img src="/img/foo.png" alt="First">
+ #     </img>
+ #     <h3>
+ #       <a href="/first">
+ #         First
+ #       </a>
+ #     </h3>
+ #     <p>
+ #       This is description #1
+ #     </p>
+ #   </div>
+ #   <div class="nav-item2">
+ #     <img src="/img/bar.png" alt="Second">
+ #     </img>
+ #     <h3>
+ #       <a href="/second">
+ #         Second
+ #       </a>
+ #     </h3>
+ #     <p>
+ #       This is description #2
+ #     </p>
+ #   </div>
+ # </nav>
+
+=head1 EXAMPLE2
+
+=for comment filename=plack_app_nav_grid.pl
+
+ use strict;
+ use warnings;
+ 
+ use CSS::Struct::Output::Indent;
+ use Data::Navigation::Item;
+ use Plack::App::Tags::HTML;
+ use Plack::Builder;
+ use Plack::Runner;
+ use Tags::Output::Indent;
+
+ # Plack application with foo SVG file.
+ my $svg_foo = <<'END';
+ <?xml version="1.0" ?>
+ <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="-1 -1 2 2">
+   <polygon points="0,-0.5 0.433,0.25 -0.433,0.25" fill="#FF6347"/>
+   <polygon points="0,-0.5 0.433,0.25 0,0.75" fill="#4682B4"/>
+   <polygon points="0.433,0.25 -0.433,0.25 0,0.75" fill="#32CD32"/>
+   <polygon points="0,-0.5 -0.433,0.25 0,0.75" fill="#FFD700"/>
+ </svg>
+ END
+ my $app_foo = sub {
+         return [
+                 200,
+                 ['Content-Type' => 'image/svg+xml'],
+                 [$svg_foo],
+         ];
+ };
+
+ # Plack application with bar SVG file.
+ my $svg_bar = <<'END';
+ <?xml version="1.0" ?>
+ <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+   <polygon points="100,30 50,150 150,150" fill="#4682B4"/>
+   <polygon points="100,30 150,150 130,170" fill="#4682B4" opacity="0.9"/>
+   <polygon points="100,30 50,150 70,170" fill="#4682B4" opacity="0.9"/>
+   <polygon points="70,170 130,170 100,150" fill="#4682B4" opacity="0.8"/>
+ </svg>
+ END
+ my $app_bar = sub {
+         return [
+                 200,
+                 ['Content-Type' => 'image/svg+xml'],
+                 [$svg_bar],
+         ];
+ };
+
+ my $css = CSS::Struct::Output::Indent->new;
+ my $tags = Tags::Output::Indent->new(
+         'xml' => 1,
+         'preserved' => ['style'],
+ );
+
+ # Navigation items.
+ my @items = (
+         Data::Navigation::Item->new(
+                 'class' => 'nav-item',
+                 'desc' => 'This is description #1',
+                 'id' => 1,
+                 'image' => '/img/foo.svg',
+                 'location' => '/first',
+                 'title' => 'First',
+         ),
+         Data::Navigation::Item->new(
+                 'class' => 'nav-item',
+                 'desc' => 'This is description #2',
+                 'id' => 2,
+                 'image' => '/img/bar.svg',
+                 'location' => '/second',
+                 'title' => 'Second',
+         ),
+ );
+
+ # Plack application for grid.
+ my $app_grid = Plack::App::Tags::HTML->new(
+         'component' => 'Tags::HTML::Navigation::Grid',
+         'data_init' => [\@items],
+         'css' => $css,
+         'tags' => $tags,
+ )->to_app;
+
+ # Runner.
+ my $builder = Plack::Builder->new;
+ $builder->mount('/img/foo.svg' => $app_foo);
+ $builder->mount('/img/bar.svg' => $app_bar);
+ $builder->mount('/' => $app_grid);
+ Plack::Runner->new->run($builder->to_app);
+
+ # Output screenshot is in images/ directory.
+
+=begin html
+
+<a href="https://raw.githubusercontent.com/michal-josef-spacek/Tags-HTML-Navigation-Grid/master/images/plack_app_nav_grid.png">
+  <img src="https://raw.githubusercontent.com/michal-josef-spacek/Tags-HTML-Navigation-Grid/master/images/plack_app_nav_grid.png" alt="Web app example" width="300px" height="300px" />
+</a>
+
+=end html
+
+=head1 DEPENDENCIES
+
+L<Class::Utils>,
+L<Error::Pure>,
+L<List::Util>,
+L<Readonly>,
+L<Tags::HTML>,
+L<Tags::HTML::Messages>.
+
+=head1 SEE ALSO
+
+=over
+
+=item L<Tags::HTML::Login::Access>
+
+Tags helper for login access.
+
+=item L<Tags::HTML::Login::Button>
+
+Tags helper for login button.
+
+=item L<Tags::HTML::Login::Register>
+
+Tags helper for login register.
+
+=back
+
+=head1 REPOSITORY
+
+L<https://github.com/michal-josef-spacek/Tags-HTML-Navigation-Grid>
+
+=head1 AUTHOR
+
+Michal Josef Špaček L<mailto:skim@cpan.org>
+
+L<http://skim.cz>
+
+=head1 LICENSE AND COPYRIGHT
+
+© 2024 Michal Josef Špaček
+
+BSD 2-Clause License
+
+=head1 VERSION
+
+0.01
+
+=cut

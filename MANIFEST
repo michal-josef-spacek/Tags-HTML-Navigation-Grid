@@ -1,5 +1,8 @@
 Changes
+examples/plack_app_nav_grid.pl
+examples/print_grid_html_and_css.pl
 Grid.pm
+images/plack_app_nav_grid.png
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm
