@@ -183,6 +183,15 @@ Tags::HTML::Navigation::Grid - Tags helper for navigation grid.
  $obj->process;
  $obj->process_css;
 
+=head1 DESCRIPTION
+
+L<Tags> helper to print HTML page of navigation grid.
+
+The page contains multiple boxes with title and optional image and description in box.
+Each box could have link to other page.
+
+Items are defined by L<Data::Navigation::Item> instances.
+
 =head1 METHODS
 
 =head2 C<new>

@@ -11,6 +11,14 @@ SYNOPSIS
      $obj->process;
      $obj->process_css;
 
+DESCRIPTION
+    Tags helper to print HTML page of navigation grid.
+
+    The page contains multiple boxes with title and optional image and
+    description in box. Each box could have link to other page.
+
+    Items are defined by Data::Navigation::Item instances.
+
 METHODS
   "new"
      my $obj = Tags::HTML::Navigation::Grid->new(%params);
@@ -162,9 +170,10 @@ EXAMPLE1
      #         width: 100px;
      #         height: 100px;
      # }
-     # .nav-item h3 {
+     # .nav-item div.title {
      #         margin: 10px 0;
      #         font-family: sans-serif;
+     #         font-weight: bold;
      # }
      # .nav-item  {
      #         text-align: center;
@@ -174,25 +183,25 @@ EXAMPLE1
      # HTML
      # <nav class="navigation">
      #   <div class="nav-item1">
-     #     <img src="/img/foo.png" alt="First">
-     #     </img>
-     #     <h3>
-     #       <a href="/first">
+     #     <a href="/first">
+     #       <img src="/img/foo.png" alt="First">
+     #       </img>
+     #       <div class="title">
      #         First
-     #       </a>
-     #     </h3>
+     #       </div>
+     #     </a>
      #     <p>
      #       This is description #1
      #     </p>
      #   </div>
      #   <div class="nav-item2">
-     #     <img src="/img/bar.png" alt="Second">
-     #     </img>
-     #     <h3>
-     #       <a href="/second">
+     #     <a href="/second">
+     #       <img src="/img/bar.png" alt="Second">
+     #       </img>
+     #       <div class="title">
      #         Second
-     #       </a>
-     #     </h3>
+     #       </div>
+     #     </a>
      #     <p>
      #       This is description #2
      #     </p>
