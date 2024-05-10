@@ -299,8 +299,7 @@ EXAMPLE2
      # Output screenshot is in images/ directory.
 
 DEPENDENCIES
-    Class::Utils, Error::Pure, List::Util, Readonly, Tags::HTML,
-    Tags::HTML::Messages.
+    Class::Utils, Error::Pure, Scalar::Util, Tags::HTML.
 
 SEE ALSO
     Tags::HTML::Login::Access

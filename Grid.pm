@@ -503,10 +503,8 @@ Returns undef.
 
 L<Class::Utils>,
 L<Error::Pure>,
-L<List::Util>,
-L<Readonly>,
-L<Tags::HTML>,
-L<Tags::HTML::Messages>.
+L<Scalar::Util>,
+L<Tags::HTML>.
 
 =head1 SEE ALSO
 
