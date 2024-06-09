@@ -85,6 +85,13 @@ ERRORS
      new():
              From Class::Utils::set_params():
                      Unknown parameter '%s'.
+             From Mo::utils::check_required():
+                     Parameter 'css_class' is required.
+             From Mo::utils::CSS::check_css_class():
+                     Parameter 'css_class' has bad CSS class name.
+                             Value: %s
+                     Parameter 'css_class' has bad CSS class name (number on begin).
+                             Value: %s
              From Tags::HTML::new():
                      Parameter 'css' must be a 'CSS::Struct::Output::*' class.
                      Parameter 'tags' must be a 'Tags::Output::*' class.
@@ -299,7 +306,8 @@ EXAMPLE2
      # Output screenshot is in images/ directory.
 
 DEPENDENCIES
-    Class::Utils, Error::Pure, Scalar::Util, Tags::HTML.
+    Class::Utils, Error::Pure, Mo::utils, Mo::utils::CSS, Scalar::Util,
+    Tags::HTML.
 
 SEE ALSO
     Tags::HTML::Login::Access

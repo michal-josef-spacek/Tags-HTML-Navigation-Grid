@@ -1,4 +1,5 @@
 0.03
+ - Rewrite to use of Mo::utils and Mo::utils::CSS.
 
 0.02 2024-05-11T00:43:23+02:00
  - Add DESCRIPTION section to doc.

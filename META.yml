@@ -31,6 +31,8 @@ no_index:
 requires:
   Class::Utils: 0
   Error::Pure: 0
+  Mo::utils: 0.01
+  Mo::utils::CSS: 0.02
   Scalar::Util: 0
   Tags::HTML: 0.08
   perl: 5.8.0

@@ -6,6 +6,8 @@ use warnings;
 
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
+use Mo::utils 0.01 qw(check_required);
+use Mo::utils::CSS 0.02 qw(check_css_class);
 use Scalar::Util qw(blessed);
 
 our $VERSION = 0.03;
@@ -25,9 +27,8 @@ sub new {
 	# Process params.
 	set_params($self, @{$object_params_ar});
 
-	if (! defined $self->{'css_class'}) {
-		err "Parameter 'css_class' is required.";
-	}
+	check_required($self, 'css_class');
+	check_css_class($self, 'css_class');
 
 	# Object.
 	return $self;
@@ -272,6 +273,13 @@ Returns undef.
  new():
          From Class::Utils::set_params():
                  Unknown parameter '%s'.
+         From Mo::utils::check_required():
+                 Parameter 'css_class' is required.
+         From Mo::utils::CSS::check_css_class():
+                 Parameter 'css_class' has bad CSS class name.
+                         Value: %s
+                 Parameter 'css_class' has bad CSS class name (number on begin).
+                         Value: %s
          From Tags::HTML::new():
                  Parameter 'css' must be a 'CSS::Struct::Output::*' class.
                  Parameter 'tags' must be a 'Tags::Output::*' class.
@@ -503,6 +511,8 @@ Returns undef.
 
 L<Class::Utils>,
 L<Error::Pure>,
+L<Mo::utils>,
+L<Mo::utils::CSS>,
 L<Scalar::Util>,
 L<Tags::HTML>.
 

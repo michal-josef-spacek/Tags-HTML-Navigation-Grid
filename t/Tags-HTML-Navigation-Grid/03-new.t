@@ -7,7 +7,7 @@ use Error::Pure::Utils qw(clean);
 use Tags::HTML::Navigation::Grid;
 use Tags::Output::Structure;
 use Test::MockObject;
-use Test::More 'tests' => 8;
+use Test::More 'tests' => 10;
 use Test::NoWarnings;
 
 # Test.
@@ -50,6 +50,45 @@ clean();
 # Test.
 eval {
 	Tags::HTML::Navigation::Grid->new(
+		'css_class' => undef,
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'css_class' is required.\n",
+	"Parameter 'css_class' is required.",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Navigation::Grid->new(
+		'css_class' => '1foo',
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'css_class' has bad CSS class name (number on begin).\n",
+	"Parameter 'css_class' has bad CSS class name (number on begin) (1foo).",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Navigation::Grid->new(
+		'css_class' => '@foo',
+	);
+};
+is(
+	$EVAL_ERROR,
+	"Parameter 'css_class' has bad CSS class name.\n",
+	"Parameter 'css_class' has bad CSS class name (\@foo).",
+);
+clean();
+
+# Test.
+eval {
+	Tags::HTML::Navigation::Grid->new(
 		'tags' => 'foo',
 	);
 };
@@ -70,18 +109,5 @@ is(
 	$EVAL_ERROR,
 	"Parameter 'tags' must be a 'Tags::Output::*' class.\n",
 	"Parameter 'tags' must be a 'Tags::Output::*' class (bad instance).",
-);
-clean();
-
-# Test.
-eval {
-	Tags::HTML::Navigation::Grid->new(
-		'css_class' => undef,
-	);
-};
-is(
-	$EVAL_ERROR,
-	"Parameter 'css_class' is required.\n",
-	"Parameter 'css_class' is required.",
 );
 clean();
